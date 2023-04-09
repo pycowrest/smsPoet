@@ -1,0 +1,27 @@
+#amplify-do-not-edit-begin
+smsPoetUser/.expo
+smsPoetUser/amplify/\#current-cloud-backend
+smsPoetUser/amplify/.config/local-*
+smsPoetUser/amplify/logs
+smsPoetUser/amplify/mock-data
+smsPoetUser/amplify/mock-api-resources
+smsPoetUser/amplify/backend/amplify-meta.json
+smsPoetUser/amplify/backend/.temp
+smsPoetUser/build/
+smsPoetUser/dist/
+smsPoetUser/node_modules/
+smsPoetUser/node_modules
+smsPoetUser/aws-exports.js
+smsPoetUser/awsconfiguration.json
+smsPoetUser/amplifyconfiguration.json
+smsPoetUser/amplifyconfiguration.dart
+smsPoetUser/amplify-build-config.json
+smsPoetUser/amplify-gradle-config.json
+smsPoetUser/amplifytools.xcconfig
+smsPoetUser/.secret-*
+smsPoetUser/**.sample
+#amplify-do-not-edit-end
+smsPoetUser/.expo/
+smsPoetUser/smsPoetUser.zip
+smsPoetUser/amplify/backend/api/smsPoet/build/
+# smsPoetUser/amplify/backend/awscloudformation/build/root-cloudformation-stack.json

@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-smspoet-staging-105825-authRole",
+      "UnauthRoleArn": "arn:aws:iam::097298460422:role/amplify-smspoet-staging-105825-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::097298460422:role/amplify-smspoet-staging-105825-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-smspoet-staging-105825-deployment",
+      "UnauthRoleName": "amplify-smspoet-staging-105825-unauthRole",
+      "StackName": "amplify-smspoet-staging-105825",
+      "StackId": "arn:aws:cloudformation:eu-north-1:097298460422:stack/amplify-smspoet-staging-105825/73f96920-d6c5-11ed-8b9a-0a10818d219c",
+      "AmplifyAppId": "d2qgvb09c24eyf"
+    },
+    "categories": {
+      "auth": {
+        "smsPoet": {}
+      }
+    }
+  }
+}
