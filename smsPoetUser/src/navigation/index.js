@@ -8,7 +8,10 @@ import Basket from '../screens/Basket';
 import OrdersScreen from '../screens/OrdersScreen';
 import OrderDetails from '../screens/orderDetails';
 import OrderScreen from '../screens/OrdersScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
 import { Foundation, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Profiler } from 'react';
 
 const Stack = createNativeStackNavigator(); //Stack contains stack.nabigator and stack.screen now with this we can stracture our navigaton.
 // now for that wee need a component
@@ -25,7 +28,10 @@ const Tab = createBottomTabNavigator();
 
 const HomeTabs = () => {
     return(
-        <Tab.Navigator barStyle={{backgroundColor: "white"}}>
+        <Tab.Navigator 
+        screenOptions={{ headerShown: false }}
+        barStyle={{backgroundColor: "white"}}>
+        
             <Tab.Screen 
             name='Home' 
             component={HomeStackNavigator}   
@@ -46,7 +52,7 @@ const HomeTabs = () => {
             />
             <Tab.Screen 
             name='Profile' 
-            component={OrdersScreen} 
+            component={ProfileScreen} 
             options={{
                 tabBarIcon:({color}) => (
                 <FontAwesome5 name="user-alt" size={24} color={color} /> 
@@ -63,7 +69,11 @@ const HomeStackNavigator = () => {
     return(
         <HomeStack.Navigator>
             <HomeStack.Screen name="Restaurants" component={HomeScreen} />
-            <HomeStack.Screen name="Restaurant" component={RestaurantDetailsScreen} />
+            <HomeStack.Screen 
+            name="Restaurant" 
+            component={RestaurantDetailsScreen} 
+            options={{ headerShown: false}}
+             />
             <HomeStack.Screen name="Dish" component={DishDetailsScreen} />
             <HomeStack.Screen name="Basket" component={Basket} />
         </HomeStack.Navigator>
