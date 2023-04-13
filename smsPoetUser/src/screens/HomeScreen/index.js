@@ -4,17 +4,11 @@ import { useEffect, useState } from 'react';
 import { DataStore } from 'aws-amplify';
 import { Restaurant } from '../../models';
 
-
 export default function HomeScreen() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-      // const results = await DataStore.query(Restaurant);
-      // setRestaurants(results);
-
-      // DataStore.query(Restaurant).then(results => setRestaurants(results));
-      DataStore.query(Restaurant).then(setRestaurants);
-
+      DataStore.query(Restaurant).then((results) => setRestaurants(results));
   }, []);
   return (
     <View style={styles.page}>

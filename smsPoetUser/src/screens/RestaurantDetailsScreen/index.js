@@ -1,43 +1,75 @@
-import { View, Text, Image, FlatList, StyleSheet } from "react-native";
+import { useState, useEffect } from "react";
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  Pressable,
+  Text,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import DishListItem from "../../components/DishListItem";
-import {Ionicons} from "@expo/vector-icons";
-import restaurants from  '../../../assets/data/restaurants.json';
 import Header from "./Header";
 import styles from "./styles";
-import { useRoute, useNavigation } from "@react-navigation/native"; 
+import { useRoute, useNavigation } from "@react-navigation/native";
+import { DataStore } from "aws-amplify";
+import { Restaurant, Dish } from "../../models";
 
-const restaurant = restaurants[0];
 
 const RestaurantDetailsPage = () => {
+  const [restaurant, setRestaurant] = useState(null);
+  const [dishes, setDishes] = useState([]);
 
-    const route = useRoute();
-    const navigation = useNavigation(); 
-    // this route information contains a lot of details about the state, the name of the rout, like
-                              // where are you coming from and so on but what we are interested is in the id of a restaurant that
-    const id = route.params.id;                          // is inside params.id...
-    console.warn(id);
-    return (
-        <View style={styles.page}>
+  const route = useRoute();
+  const navigation = useNavigation();
 
-        <FlatList 
-            ListHeaderComponent={() => <Header restaurant={restaurant}/>}
-            data={restaurant.dishes}
-            renderItem={({ item }) => <DishListItem dish={item} />}
-            keyExtractor={(item) => item.name} // here we give this posibility to give it a key to extract our function that will specify that how 
-                            // should i specify a key based on the item data
-        />
+  const id = route.params?.id;
+  
+//   const fetchRestaurant = async () => {
+//     if(id) {
+//         const response = await DataStore.query(Restaurant, id);
+//         setRestaurant(response);
 
-        <Ionicons
-            onPress={() => navigation.goBack()}
-            name="arrow-back-circle"
-            size={45} 
-            color="white"
-            style={styles.iconContainer} />
+//         const dishResponse = await DataStore.query(Dish, (dish) =>
+//         dish.restaurantID("eq", id)
+//         );
+//         setDishes(dishResponse);
+//     }
+//   };
 
-        </View> 
+//   useEffect(() => {
+//     fetchRestaurant();
+//   }, [id]);
+  useEffect(() => {
+    // fetch the restaurant with the id
+    DataStore.query(Restaurant, id).then(setRestaurant);
+
+    DataStore.query(Dish, (dish) => dish.restaurantID.eq(id)).then(
+      setDishes
     );
+  }, [id]);
+
+
+  if (!restaurant) {
+    return <ActivityIndicator size={"large"} color="gray" />;
+  }
+
+  return (
+    <View style={styles.page}>
+      <FlatList
+        ListHeaderComponent={() => <Header restaurant={restaurant} />}
+        data={dishes}
+        renderItem={({ item }) => <DishListItem dish={item} />}
+        keyExtractor={(item) => item.name}
+      />
+      <Ionicons
+        onPress={() => navigation.goBack()}
+        name="arrow-back-circle"
+        size={45}
+        color="white"
+        style={styles.iconContainer}
+      />
+    </View>
+  );
 };
 
-
 export default RestaurantDetailsPage;
-    
