@@ -10,8 +10,8 @@ import config from './src/aws-exports';
 Amplify.configure({
   ...config,
    Analytics: {
-    disable: true,
-  },
+    disable: true
+  }
   });
 
 function App() {
@@ -24,4 +24,4 @@ function App() {
   );
 };
 
-export default withAuthenticator(App, { includeGreetings: false });
+export default withAuthenticator(App);

@@ -24,24 +24,12 @@ const RestaurantDetailsPage = () => {
 
   const id = route.params?.id;
   
-//   const fetchRestaurant = async () => {
-//     if(id) {
-//         const response = await DataStore.query(Restaurant, id);
-//         setRestaurant(response);
-
-//         const dishResponse = await DataStore.query(Dish, (dish) =>
-//         dish.restaurantID("eq", id)
-//         );
-//         setDishes(dishResponse);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchRestaurant();
-//   }, [id]);
   useEffect(() => {
+    if (!id){
+        return; // so if id is undefined im gonna stop execution of this funciton
+    }
     // fetch the restaurant with the id
-    DataStore.query(Restaurant, id).then(setRestaurant);
+    DataStore.query(Restaurant, id).then(setRestaurant); // here we can see it depends here on the id so we add it to the dependency
 
     DataStore.query(Dish, (dish) => dish.restaurantID.eq(id)).then(
       setDishes

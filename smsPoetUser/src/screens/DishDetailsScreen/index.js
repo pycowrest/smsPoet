@@ -1,16 +1,25 @@
-import { View, Text, StyleSheet, Pressable} from "react-native";
-import { useState } from "react";
+import { View, Text, StyleSheet, Pressable, ActivityIndicator} from "react-native";
+import { useState, useEffect } from "react";
 import { AntDesign} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-import restaurants from "../../../assets/data/restaurants.json";
-const dish = restaurants[0].dishes[0];
-
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { DataStore } from "aws-amplify";
+import { Dish } from "../../models";
 
 
 const DishDetailsScreen = () => {
+    const [Dish, setDish] = useState();
     const [quantity, setQuantity]= useState(1); // useState Hook will give us back and array of two values.
+
     const navigation = useNavigation();
+    const route = useRoute();
+    const id = route.params?.id; // it might be null so we add ?
+
+
+    useEffect(() => {
+        if (!id) {
+        DataStore.query(Dish, id).then(setDish)
+        }
+    }, [id]);
 
     const onMinus = () => {
         if (quantity > 1) {
@@ -30,6 +39,10 @@ const DishDetailsScreen = () => {
         // we can just change the value of the state with the setter function not by value.
 
         // now we comment both above cause we can define these when just we creat useState.
+
+    if (!dish) {
+        return <ActivityIndicator color="gray" size="large" />
+    };
     return (
         <View style={styles.page}>
             <Text style={styles.name}>{dish.name}</Text>
