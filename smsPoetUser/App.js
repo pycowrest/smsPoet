@@ -9,7 +9,7 @@ import config from './src/aws-exports';
 
 Amplify.configure({
   ...config,
-   Analytics: {
+  Analytics: {
     disable: true
   }
   });

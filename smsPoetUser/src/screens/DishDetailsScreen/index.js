@@ -7,7 +7,7 @@ import { Dish } from "../../models";
 
 
 const DishDetailsScreen = () => {
-    const [Dish, setDish] = useState();
+    const [dish, setDish] = useState(null);
     const [quantity, setQuantity]= useState(1); // useState Hook will give us back and array of two values.
 
     const navigation = useNavigation();
@@ -16,8 +16,8 @@ const DishDetailsScreen = () => {
 
 
     useEffect(() => {
-        if (!id) {
-        DataStore.query(Dish, id).then(setDish)
+        if (id) {
+        DataStore.query(Dish, id).then(setDish);
         }
     }, [id]);
 

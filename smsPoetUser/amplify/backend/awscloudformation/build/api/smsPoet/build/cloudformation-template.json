@@ -123,7 +123,7 @@
           ]
         },
         "Description": "api key description",
-        "Expires": 1683842620
+        "Expires": 1684244023
       }
     },
     "GraphQLAPINONEDS95A13CF0": {
@@ -385,6 +385,566 @@
         "GraphQLAPITransformerSchema3CB2AE18"
       ]
     },
+    "Basket": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.",
+              {
+                "Ref": "AWS::Region"
+              },
+              ".",
+              {
+                "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentBucket"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "/stacks/Basket.json"
+            ]
+          ]
+        },
+        "Parameters": {
+          "DynamoDBModelTableReadIOPS": {
+            "Ref": "DynamoDBModelTableReadIOPS"
+          },
+          "DynamoDBModelTableWriteIOPS": {
+            "Ref": "DynamoDBModelTableWriteIOPS"
+          },
+          "DynamoDBBillingMode": {
+            "Ref": "DynamoDBBillingMode"
+          },
+          "DynamoDBEnablePointInTimeRecovery": {
+            "Ref": "DynamoDBEnablePointInTimeRecovery"
+          },
+          "DynamoDBEnableServerSideEncryption": {
+            "Ref": "DynamoDBEnableServerSideEncryption"
+          },
+          "referencetotransformerrootstackenv10C5A902Ref": {
+            "Ref": "env"
+          },
+          "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+            "Fn::GetAtt": [
+              "GraphQLAPI",
+              "ApiId"
+            ]
+          },
+          "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+            "Ref": "S3DeploymentBucket"
+          },
+          "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+            "Ref": "S3DeploymentRootKey"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+            "Ref": "authRoleName"
+          },
+          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+            "Ref": "unauthRoleName"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId"
+            ]
+          }
+        }
+      },
+      "DependsOn": [
+        "GraphQLAPITransformerSchema3CB2AE18"
+      ]
+    },
+    "OrderDish": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.",
+              {
+                "Ref": "AWS::Region"
+              },
+              ".",
+              {
+                "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentBucket"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "/stacks/OrderDish.json"
+            ]
+          ]
+        },
+        "Parameters": {
+          "DynamoDBModelTableReadIOPS": {
+            "Ref": "DynamoDBModelTableReadIOPS"
+          },
+          "DynamoDBModelTableWriteIOPS": {
+            "Ref": "DynamoDBModelTableWriteIOPS"
+          },
+          "DynamoDBBillingMode": {
+            "Ref": "DynamoDBBillingMode"
+          },
+          "DynamoDBEnablePointInTimeRecovery": {
+            "Ref": "DynamoDBEnablePointInTimeRecovery"
+          },
+          "DynamoDBEnableServerSideEncryption": {
+            "Ref": "DynamoDBEnableServerSideEncryption"
+          },
+          "referencetotransformerrootstackenv10C5A902Ref": {
+            "Ref": "env"
+          },
+          "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+            "Fn::GetAtt": [
+              "GraphQLAPI",
+              "ApiId"
+            ]
+          },
+          "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+            "Ref": "S3DeploymentBucket"
+          },
+          "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+            "Ref": "S3DeploymentRootKey"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+            "Ref": "authRoleName"
+          },
+          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+            "Ref": "unauthRoleName"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId"
+            ]
+          }
+        }
+      },
+      "DependsOn": [
+        "GraphQLAPITransformerSchema3CB2AE18"
+      ]
+    },
+    "Order": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.",
+              {
+                "Ref": "AWS::Region"
+              },
+              ".",
+              {
+                "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentBucket"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "/stacks/Order.json"
+            ]
+          ]
+        },
+        "Parameters": {
+          "DynamoDBModelTableReadIOPS": {
+            "Ref": "DynamoDBModelTableReadIOPS"
+          },
+          "DynamoDBModelTableWriteIOPS": {
+            "Ref": "DynamoDBModelTableWriteIOPS"
+          },
+          "DynamoDBBillingMode": {
+            "Ref": "DynamoDBBillingMode"
+          },
+          "DynamoDBEnablePointInTimeRecovery": {
+            "Ref": "DynamoDBEnablePointInTimeRecovery"
+          },
+          "DynamoDBEnableServerSideEncryption": {
+            "Ref": "DynamoDBEnableServerSideEncryption"
+          },
+          "referencetotransformerrootstackenv10C5A902Ref": {
+            "Ref": "env"
+          },
+          "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+            "Fn::GetAtt": [
+              "GraphQLAPI",
+              "ApiId"
+            ]
+          },
+          "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+            "Ref": "S3DeploymentBucket"
+          },
+          "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+            "Ref": "S3DeploymentRootKey"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+            "Ref": "authRoleName"
+          },
+          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+            "Ref": "unauthRoleName"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId"
+            ]
+          }
+        }
+      },
+      "DependsOn": [
+        "GraphQLAPITransformerSchema3CB2AE18"
+      ]
+    },
+    "BasketDish": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.",
+              {
+                "Ref": "AWS::Region"
+              },
+              ".",
+              {
+                "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentBucket"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "/stacks/BasketDish.json"
+            ]
+          ]
+        },
+        "Parameters": {
+          "DynamoDBModelTableReadIOPS": {
+            "Ref": "DynamoDBModelTableReadIOPS"
+          },
+          "DynamoDBModelTableWriteIOPS": {
+            "Ref": "DynamoDBModelTableWriteIOPS"
+          },
+          "DynamoDBBillingMode": {
+            "Ref": "DynamoDBBillingMode"
+          },
+          "DynamoDBEnablePointInTimeRecovery": {
+            "Ref": "DynamoDBEnablePointInTimeRecovery"
+          },
+          "DynamoDBEnableServerSideEncryption": {
+            "Ref": "DynamoDBEnableServerSideEncryption"
+          },
+          "referencetotransformerrootstackenv10C5A902Ref": {
+            "Ref": "env"
+          },
+          "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+            "Fn::GetAtt": [
+              "GraphQLAPI",
+              "ApiId"
+            ]
+          },
+          "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+            "Ref": "S3DeploymentBucket"
+          },
+          "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+            "Ref": "S3DeploymentRootKey"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+            "Ref": "authRoleName"
+          },
+          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+            "Ref": "unauthRoleName"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId"
+            ]
+          }
+        }
+      },
+      "DependsOn": [
+        "GraphQLAPITransformerSchema3CB2AE18"
+      ]
+    },
+    "User": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": {
+          "Fn::Join": [
+            "",
+            [
+              "https://s3.",
+              {
+                "Ref": "AWS::Region"
+              },
+              ".",
+              {
+                "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentBucket"
+              },
+              "/",
+              {
+                "Ref": "S3DeploymentRootKey"
+              },
+              "/stacks/User.json"
+            ]
+          ]
+        },
+        "Parameters": {
+          "DynamoDBModelTableReadIOPS": {
+            "Ref": "DynamoDBModelTableReadIOPS"
+          },
+          "DynamoDBModelTableWriteIOPS": {
+            "Ref": "DynamoDBModelTableWriteIOPS"
+          },
+          "DynamoDBBillingMode": {
+            "Ref": "DynamoDBBillingMode"
+          },
+          "DynamoDBEnablePointInTimeRecovery": {
+            "Ref": "DynamoDBEnablePointInTimeRecovery"
+          },
+          "DynamoDBEnableServerSideEncryption": {
+            "Ref": "DynamoDBEnableServerSideEncryption"
+          },
+          "referencetotransformerrootstackenv10C5A902Ref": {
+            "Ref": "env"
+          },
+          "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+            "Fn::GetAtt": [
+              "GraphQLAPI",
+              "ApiId"
+            ]
+          },
+          "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+            "Ref": "S3DeploymentBucket"
+          },
+          "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+            "Ref": "S3DeploymentRootKey"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishauth0FunctionQuerygetDishauth0FunctionAppSyncFunction25F7D436FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishQuerygetDishpostAuth0FunctionQuerygetDishpostAuth0FunctionAppSyncFunction30A37E76FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+            "Ref": "authRoleName"
+          },
+          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+            "Ref": "unauthRoleName"
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishinit0FunctionMutationcreateDishinit0FunctionAppSyncFunctionD686B082FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationcreateDishauth0FunctionMutationcreateDishauth0FunctionAppSyncFunctionBDE18326FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishMutationupdateDishinit0FunctionMutationupdateDishinit0FunctionAppSyncFunction8D21BFC0FunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptiononCreateDishauth0FunctionSubscriptiononCreateDishauth0FunctionAppSyncFunction05757FDDFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId": {
+            "Fn::GetAtt": [
+              "Dish",
+              "Outputs.transformerrootstackDishSubscriptionOnCreateDishDataResolverFnSubscriptionOnCreateDishDataResolverFnAppSyncFunction8F5C01E1FunctionId"
+            ]
+          }
+        }
+      },
+      "DependsOn": [
+        "GraphQLAPITransformerSchema3CB2AE18"
+      ]
+    },
     "Restaurant": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -543,6 +1103,60 @@
           "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
             "Ref": "S3DeploymentRootKey"
           },
+          "referencetotransformerrootstackBasketDishNestedStackBasketDishNestedStackResourceAD9E248COutputstransformerrootstackBasketDishBasketDishDataSource2511C627Name": {
+            "Fn::GetAtt": [
+              "BasketDish",
+              "Outputs.transformerrootstackBasketDishBasketDishDataSource2511C627Name"
+            ]
+          },
+          "referencetotransformerrootstackBasketDishNestedStackBasketDishNestedStackResourceAD9E248COutputstransformerrootstackBasketDishBasketDishTable7B4B495FRef": {
+            "Fn::GetAtt": [
+              "BasketDish",
+              "Outputs.transformerrootstackBasketDishBasketDishTable7B4B495FRef"
+            ]
+          },
+          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
+            "Ref": "authRoleName"
+          },
+          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
+            "Ref": "unauthRoleName"
+          },
+          "referencetotransformerrootstackOrderDishNestedStackOrderDishNestedStackResourceEF9A3E17OutputstransformerrootstackOrderDishOrderDishDataSource24D6EC46Name": {
+            "Fn::GetAtt": [
+              "OrderDish",
+              "Outputs.transformerrootstackOrderDishOrderDishDataSource24D6EC46Name"
+            ]
+          },
+          "referencetotransformerrootstackOrderDishNestedStackOrderDishNestedStackResourceEF9A3E17OutputstransformerrootstackOrderDishOrderDishTable6ECC7779Ref": {
+            "Fn::GetAtt": [
+              "OrderDish",
+              "Outputs.transformerrootstackOrderDishOrderDishTable6ECC7779Ref"
+            ]
+          },
+          "referencetotransformerrootstackBasketNestedStackBasketNestedStackResourceC83874A4OutputstransformerrootstackBasketBasketDataSource14CCE165Name": {
+            "Fn::GetAtt": [
+              "Basket",
+              "Outputs.transformerrootstackBasketBasketDataSource14CCE165Name"
+            ]
+          },
+          "referencetotransformerrootstackBasketNestedStackBasketNestedStackResourceC83874A4OutputstransformerrootstackBasketBasketTableB1CC5A40Ref": {
+            "Fn::GetAtt": [
+              "Basket",
+              "Outputs.transformerrootstackBasketBasketTableB1CC5A40Ref"
+            ]
+          },
+          "referencetotransformerrootstackOrderNestedStackOrderNestedStackResourceEB5E0067OutputstransformerrootstackOrderOrderDataSource25A54381Name": {
+            "Fn::GetAtt": [
+              "Order",
+              "Outputs.transformerrootstackOrderOrderDataSource25A54381Name"
+            ]
+          },
+          "referencetotransformerrootstackOrderNestedStackOrderNestedStackResourceEB5E0067OutputstransformerrootstackOrderOrderTableB4665187Ref": {
+            "Fn::GetAtt": [
+              "Order",
+              "Outputs.transformerrootstackOrderOrderTableB4665187Ref"
+            ]
+          },
           "referencetotransformerrootstackDishNestedStackDishNestedStackResource1BA06CF9OutputstransformerrootstackDishDishDataSource69022A92Name": {
             "Fn::GetAtt": [
               "Dish",
@@ -555,17 +1169,28 @@
               "Outputs.transformerrootstackDishDishTable7E139021Ref"
             ]
           },
-          "referencetotransformerrootstackauthRoleNameFB872D50Ref": {
-            "Ref": "authRoleName"
+          "referencetotransformerrootstackRestaurantNestedStackRestaurantNestedStackResource0D0D5B73OutputstransformerrootstackRestaurantRestaurantDataSource5C7EC6D7Name": {
+            "Fn::GetAtt": [
+              "Restaurant",
+              "Outputs.transformerrootstackRestaurantRestaurantDataSource5C7EC6D7Name"
+            ]
           },
-          "referencetotransformerrootstackunauthRoleName49F3C1FERef": {
-            "Ref": "unauthRoleName"
+          "referencetotransformerrootstackRestaurantNestedStackRestaurantNestedStackResource0D0D5B73OutputstransformerrootstackRestaurantRestaurantTable7313BAC7Ref": {
+            "Fn::GetAtt": [
+              "Restaurant",
+              "Outputs.transformerrootstackRestaurantRestaurantTable7313BAC7Ref"
+            ]
           }
         }
       },
       "DependsOn": [
+        "Basket",
+        "BasketDish",
         "Dish",
-        "GraphQLAPITransformerSchema3CB2AE18"
+        "GraphQLAPITransformerSchema3CB2AE18",
+        "Order",
+        "OrderDish",
+        "Restaurant"
       ]
     },
     "CustomResourcesjson": {
@@ -612,6 +1237,11 @@
         "GraphQLAPI",
         "GraphQLAPITransformerSchema3CB2AE18",
         "Dish",
+        "Basket",
+        "OrderDish",
+        "Order",
+        "BasketDish",
+        "User",
         "Restaurant",
         "ConnectionStack"
       ]
